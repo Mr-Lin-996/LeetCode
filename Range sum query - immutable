@@ -1,3 +1,14 @@
+Create Range sum query - immutable
+
+给定一个整数数组  nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。
+
+实现 NumArray 类：
+
+NumArray(int[] nums) 使用数组 nums 初始化对象
+int sumRange(int i, int j) 返回数组 nums 从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点（也就是 sum(nums[i], nums[i + 1], ... , nums[j])）
+
+
+
 //利用map实现缓存，容易超时
 //时间复杂度：每次查询的时间 O(1)，O(n^2) 时间用来预计算。在构造函数中完成的预计算需要 O(n^2)时间。每个 sumrange 查询的时间复杂性是 O(1)因为哈希表的查找操作是常量时间。
 //空间复杂度：O(n^2)，所需的额外空间为 O(n^2) 因为 i 和 j 都有 n 个候选空间。
