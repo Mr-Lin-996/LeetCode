@@ -1,0 +1,72 @@
+//全倒
+public class Solution {
+    public string ReverseVowels(string s) {
+        if(s.Length <= 1) return s;
+        HashSet<char> hash = new HashSet<char>{
+            'a','e','i','o','u','A','E','I','O','U'
+        };
+        int l = 0, r = s.Length - 1;
+        char[] arr = new char[s.Length];
+        while(l <= r){
+            bool jL = hash.Contains(s[l]);
+            bool jR = hash.Contains(s[r]);
+            if(!jL) arr[l] = s[l++];
+            if(!jR) arr[r] = s[r--];
+            if(jL && jR){
+                arr[l] = s[r];
+                arr[r] = s[l];
+                l++;
+                r--;
+            }
+        }
+        return new string(arr);
+    }
+}
+
+//挨个倒
+public class Solution {
+    public string ReverseVowels(string s) {
+        if(s.Length <= 1){
+            return s;
+        }
+        
+        int L = 0;
+        int R = s.Length - 1;
+        char[] arr = s.ToCharArray();
+        HashSet<char> hash = new HashSet<char>(){'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+        while(L < R){
+            while(L < R && !hash.Contains(s[L])){L++;}
+            while(L < R && !hash.Contains(s[R])){R--;}
+            if(s[L] != s[R]){
+                char temp = arr[L];
+                arr[L] = arr[R];
+                arr[R] = temp;
+            }
+            L++;
+            R--;
+        }
+        return  new string(arr);
+    }
+}
+
+//保存index
+class Solution {
+    public String reverseVowels(String s) {
+        int[] index = new int[s.length()];
+        int n = 0;
+        char[] s_ch = s.toCharArray();
+        for(int i = 0; i < s_ch.length; i++){
+            if('a'==s_ch[i] || 'e'==s_ch[i] || 'i'==s_ch[i] || 'o'==s_ch[i] || 'u'==s_ch[i]
+            || 'A'==s_ch[i] || 'E'==s_ch[i] || 'I'==s_ch[i] || 'O'==s_ch[i] || 'U'==s_ch[i]){
+                index[n] = i;
+                n++;
+            }
+        }
+        for(int front = 0,back = n-1;front < back;front++,back--){
+            char tmp = s_ch[index[back]];
+            s_ch[index[back]] = s_ch[index[front]];
+            s_ch[index[front]] = tmp;
+        }
+        return String.valueOf(s_ch);
+    }
+}
